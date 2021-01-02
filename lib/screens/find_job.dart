@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:job_finder/global_widgets/category_card.dart';
 import 'package:job_finder/global_widgets/job_card.dart';
 import 'package:job_finder/global_widgets/search_box.dart';
+import 'package:job_finder/global_widgets/sub_header.dart';
 import 'package:job_finder/model/category.dart';
 import 'package:job_finder/model/job.dart';
 import 'package:lipsum/lipsum.dart' as lipsum;
@@ -28,27 +29,27 @@ class _FindJobState extends State<FindJob> {
       "assets/images/paypal_logo.png",
     ),
     Job(
-        "UI Designer",
-        lipsum.createParagraph(),
-        "UX/UI Design",
-        40,
-        "2-3",
-        "Remote",
-        lipsum.createText(numParagraphs: 3, numSentences: 5),
-        "Spotify",
-        false,
+      "UI Designer",
+      lipsum.createParagraph(),
+      "UX/UI Design",
+      40,
+      "2-3",
+      "Remote",
+      lipsum.createText(numParagraphs: 3, numSentences: 5),
+      "Spotify",
+      false,
       "assets/images/spotify_logo.png",
     ),
     Job(
-        "Software Engineer",
-        lipsum.createParagraph(),
-        "Programmer",
-        120,
-        "3-5",
-        "Remote",
-        lipsum.createText(numParagraphs: 3, numSentences: 5),
-        "ExxonMobil",
-        false,
+      "Software Engineer",
+      lipsum.createParagraph(),
+      "Programmer",
+      120,
+      "3-5",
+      "Remote",
+      lipsum.createText(numParagraphs: 3, numSentences: 5),
+      "ExxonMobil",
+      false,
       "assets/images/exxon_logo.png",
     ),
   ];
@@ -70,33 +71,50 @@ class _FindJobState extends State<FindJob> {
           height: size.height,
           child: Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TobNavBar(),
-                SizedBox(height: _defaultHeight,),
-                HeaderText(),
-                SizedBox(height: 20,),
-                SearchBox(),
-                SizedBox(height: _defaultHeight,),
-                SubHeader("suggested for you"),
-                SizedBox(height: 15,),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: jobs.map((job) => JobCard(job)).toList(),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TobNavBar(),
+                  SizedBox(
+                    height: _defaultHeight,
                   ),
-                ),
-                SizedBox(height: _defaultHeight,),
-                SubHeader("interesting categories"),
-                SizedBox(height: 15,),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: categories.map((category) => CategoryCard(category: category)).toList(),
+                  HeaderText(),
+                  SizedBox(
+                    height: 20,
                   ),
-                ),
-              ],
+                  SearchBox(),
+                  SizedBox(
+                    height: _defaultHeight,
+                  ),
+                  SubHeader(text: "suggested for you"),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: jobs.map((job) => JobCard(job)).toList(),
+                    ),
+                  ),
+                  SizedBox(
+                    height: _defaultHeight,
+                  ),
+                  SubHeader(text: "interesting categories"),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: categories
+                          .map((category) => CategoryCard(category: category))
+                          .toList(),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -140,7 +158,9 @@ class _FindJobState extends State<FindJob> {
             fontSize: 15,
           ),
         ),
-        SizedBox(height: 5,),
+        SizedBox(
+          height: 5,
+        ),
         Text(
           "Find your dream job",
           style: TextStyle(
@@ -150,17 +170,6 @@ class _FindJobState extends State<FindJob> {
           ),
         ),
       ],
-    );
-  }
-
-  Text SubHeader(String text){
-    return Text(
-      text.toUpperCase(),
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 13,
-        letterSpacing: 1.3
-      ),
     );
   }
 }
